@@ -11,7 +11,6 @@ def save(zombie):
     id = results[0]['id']
     zombie.id = id
 
-
 def select_all():
     zombies = []
     sql = "SELECT * FROM zombies"
@@ -20,8 +19,7 @@ def select_all():
         zombie_type = zombie_type_repository.select(result["zombie_type_id"])
         zombie = Zombie(result["name"], zombie_type, result["id"])
         zombies.append(zombie)
-    return zombies
-
+    return zombie
 
 def select(id):
     sql = "SELECT * FROM zombies WHERE id = %s"
@@ -31,17 +29,14 @@ def select(id):
     zombie = Zombie(result["name"], zombie_type, result["id"])
     return zombie
 
-
 def delete_all():
     sql = "DELETE FROM zombies"
     run_sql(sql)
-
 
 def delete(id):
     sql = "DELETE FROM zombies WHERE id = %s"
     values = [id]
     run_sql(sql, values)
-
 
 def update(zombie):
     sql = "UPDATE zombies SET (name, zombie_type_id) = (%s, %s) WHERE id = %s"
